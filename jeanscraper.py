@@ -1,9 +1,6 @@
 from  bs4 import BeautifulSoup
 import urllib2
 
-def tagstripper(soupObject,tagType):
-    return soupObject.find(tagType).get_text().strip()
-
 def no_dash(time):
     return time.split()[0]
 
@@ -16,19 +13,21 @@ def getinfo():
     info=first_find.findAll('tr')
     #info holds all of the tr's (rows of information)
     return info
+
 def mktimedict(info,row):
     restaurant=info[row].findAll('strong')
+    hourlist=[]
     for tag in restaurant:
-        print no_dash(tag.get_text().strip())
-    
-    
-    
-    
-         
+        hourlist.append(no_dash(tag.get_text().strip()))
+    return hourlist
+
 def main():
     info=getinfo()
-    mktimedict(info,5)
-
+    diction={}
+#    for rstr in range(12):  #where 12 is # of restuarants
+#        diction[rstr,mktimedict(info,rstr)]
+    print mktimedict(info,4)
+    print restaurant    
 
 
 if __name__=="__main__":
